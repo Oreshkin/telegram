@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/oreshkin_bot/oreshkin_bot.iml" filepath="$PROJECT_DIR$/oreshkin_bot/oreshkin_bot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/telegram.iml" filepath="$PROJECT_DIR$/telegram.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uno_game/uno_game.iml" filepath="$PROJECT_DIR$/uno_game/uno_game.iml" />
+    </modules>
+  </component>
+</project>
