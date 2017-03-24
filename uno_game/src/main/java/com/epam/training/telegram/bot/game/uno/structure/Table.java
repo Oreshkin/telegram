@@ -11,7 +11,9 @@ import java.util.ArrayList;
 public class Table {
 
     private Deck deck;
+    private ArrayList<Card> endCards = new ArrayList<Card>();
     private Card currentCard = null;
+    private boolean direction = true;
 
     public Deck getDeck() {
         return deck;
@@ -21,11 +23,48 @@ public class Table {
         return currentCard;
     }
 
+    public ArrayList<Card> getEndCards() {
+        return endCards;
+    }
+
+    public boolean direction() {
+        return direction;
+    }
+
     public void setCurrentCard(Card currentCard) {
+        endCards.add(currentCard);
         this.currentCard = currentCard;
     }
 
     public Table() {
         this.deck = new Deck();
     }
+
+    public Card getCard() {
+        if (deck.getCards().size() == 0) {
+            deck.setCards(endCards);
+            endCards.clear();
+        }
+        Card card = deck.getCards().get(0);
+        deck.getCards().remove(card);
+        return card;
+    }
+
+    public boolean setCurrentCard(int i, ArrayList<Card> hand) {
+        Card card = hand.get(i);
+        if (card.getColor().equals(currentCard.getColor())) {
+            currentCard = card;
+            hand.remove(card);
+            return true;
+        } else if (card.getValue().equals(currentCard.getValue())) {
+            currentCard = card;
+            hand.remove(card);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
 }

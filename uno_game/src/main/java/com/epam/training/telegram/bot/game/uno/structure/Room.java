@@ -11,7 +11,6 @@ public class Room {
     private Table table;
     private User user;
     private Bot bot;
-    private boolean direction;
 
     public String getChatID() {
         return chatID;
@@ -50,9 +49,31 @@ public class Room {
             table.getDeck().getCards().remove(numberCardUser);
             table.getDeck().getCards().remove(numberCardBot);
         }
+        int numberCardStart = 0;
+        while (table.getDeck().getCards().get(numberCardStart).getValue().equals("P2")
+                || table.getDeck().getCards().get(numberCardStart).getValue().equals("P4")
+                || table.getDeck().getCards().get(numberCardStart).getValue().equals("CHANGE_COLOR")) {
+            numberCardStart = new Random().nextInt(table.getDeck().getCards().size() - 1);
+        }
+        table.setCurrentCard(table.getDeck().getCards().get(numberCardStart));
+        table.getDeck().getCards().remove(numberCardStart);
+        if (table.getCurrentCard().getValue().equals("REVERT")) {
+            bot.step();
+        }
     }
 
-    public boolean stepUser() {
+    public boolean stepUser(String numberCard) {
+        try {
+            int i = Integer.parseInt(numberCard) - 1;
+            if (i >= 0 && i <user.getHand().size()) {
+                table.setCurrentCard(i, user.getHand());
+                bot.step();
+            } else {
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("ERROR number");
+        }
         return false;
     }
 }
